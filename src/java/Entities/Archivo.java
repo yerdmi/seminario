@@ -39,6 +39,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Archivo.findByTipo", query = "SELECT a FROM Archivo a WHERE a.tipo = :tipo")})
 public class Archivo implements Serializable {
 
+    @Basic(optional = false)
+    @NotNull
+    @Lob
+    @Column(name = "CONTENIDO")
+    private byte[] contenido;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,11 +55,6 @@ public class Archivo implements Serializable {
     @NotNull
     @Column(name = "FASE")
     private int fase;
-    @Basic(optional = false)
-    @NotNull
-    @Lob
-    @Column(name = "CONTENIDO")
-    private byte[] contenido;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -108,13 +109,6 @@ public class Archivo implements Serializable {
         this.fase = fase;
     }
 
-    public byte[] getContenido() {
-        return contenido;
-    }
-
-    public void setContenido(byte[] contenido) {
-        this.contenido = contenido;
-    }
 
     public String getNombre() {
         return nombre;
@@ -187,6 +181,14 @@ public class Archivo implements Serializable {
     @Override
     public String toString() {
         return "Entities.Archivo[ idArchivo=" + idArchivo + " ]";
+    }
+
+    public byte[] getContenido() {
+        return contenido;
+    }
+
+    public void setContenido(byte[] contenido) {
+        this.contenido = contenido;
     }
     
 }
